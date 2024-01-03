@@ -1,0 +1,82 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+    <title>Query Multiple Addresses of Dymension Airdrop Eligibility</title>  
+    <style>  
+        body {  
+            font-family: Arial, sans-serif;  
+            background-color: #f0f0f0;  
+            padding: 20px;  
+        }  
+        .search-container {  
+            text-align: center;  
+        }  
+        @media screen and (max-width: 600px) {  
+            .search-container {  
+                text-align: left;  
+            }  
+        }  
+        textarea {  
+            width: 100%;  
+            height: 100px;  
+            resize: vertical;  
+            border: 1px solid #ccc;  
+            border-radius: 5px;  
+        }  
+        button {  
+            padding: 10px 20px;  
+            background-color: #007BFF;  
+            color: white;  
+            border: none;  
+            border-radius: 5px;  
+            cursor: pointer;  
+        }  
+    </style>  
+    <script>  
+        function sendSearchRequest() {  
+            var searchTerm = document.getElementById("searchTerm").value;
+            var resultArea = document.getElementById('result-area');
+            // 获取文本框中的所有行，每行以换行符('\n')分隔  
+	    var addresses = searchTerm.split('\n');		  
+	    // 遍历每一行并发送HTTP GET请求  
+	    for (var i = 0; i < addresses.length; i++) {
+	        var address = addresses[i];
+		    
+		// 发送GET请求  
+		fetch('https://geteligibleuserrequest-xqbg2swtrq-uc.a.run.app/?address='+address, {
+		    method: 'GET'
+		})
+		.then(response => response.json())
+		.then(data => {
+		  console.log(data);
+		  // 在结果展示区域添加请求结果的内容  
+		  var resultElement = document.createElement('p');
+		  if ('amount' in data) {
+		    resultElement.textContent = '地址 ' + address+ ', 数量: ' + data.amount;
+		  } else {
+		    resultElement.textContent = '地址: ' + address+ ' 无空投资格: ' + data.error;
+		  }
+		  resultArea.appendChild(resultElement);
+		})
+		.catch((error) => {
+		  // 在结果展示区域添加错误信息 
+		  var errorElement = document.createElement('p');
+		  errorElement.textContent = '地址: ' + address + ' 获取空投资格出错: ' + error;
+		  resultArea.appendChild(errorElement);
+		});
+		await new Promise(r => setTimeout(r, 1000));
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="search-container">
+        <h1>Dymension空投资格批量查询</h1>
+        <h2>Query Multiple Addresses of Dymension Airdrop Eligibility</h2>
+        <textarea id="searchTerm" placeholder="输入钱包地址，多个地址换行输入. Input multiple wallet addresses with multiple lines"></textarea>  
+        <button onclick="sendSearchRequest()">查询</button>
+        <h2>查询结果展示区</h2>
+  	<div id="result-area"></div>
+    </div>  
+</body>  
+</html>
