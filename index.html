@@ -32,8 +32,9 @@
             cursor: pointer;  
         }  
     </style>  
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
     <script>  
-        function sendSearchRequest() {  
+        async function sendSearchRequest() {  
             var searchTerm = document.getElementById("searchTerm").value;
             var resultArea = document.getElementById('result-area');
             // 获取文本框中的所有行，每行以换行符('\n')分隔  
@@ -75,6 +76,7 @@
         <h2>Query Multiple Addresses of Dymension Airdrop Eligibility</h2>
         <textarea id="searchTerm" placeholder="输入钱包地址，多个地址换行输入. Input multiple wallet addresses with multiple lines"></textarea>  
         <button onclick="sendSearchRequest()">查询</button>
+        <a href="https://twitter.com/lilas_sher" target="_blank"><i class="fa-brands fa-twitter"></i> Twitter</a>    
         <h2>查询结果展示区</h2>
   	<div id="result-area"></div>
     </div>  
