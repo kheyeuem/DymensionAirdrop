@@ -53,16 +53,16 @@
 		  // 在结果展示区域添加请求结果的内容  
 		  var resultElement = document.createElement('p');
 		  if ('amount' in data) {
-		    resultElement.textContent = '地址 ' + address+ ', 数量: ' + data.amount;
+		    resultElement.textContent = '地址/Address ' + address+ ', 数量/Amount: ' + data.amount;
 		  } else {
-		    resultElement.textContent = '地址: ' + address+ ' 无空投资格: ' + data.error;
+		    resultElement.textContent = '地址/Address: ' + address+ ' 无空投资格/ineligible: ' + data.error;
 		  }
 		  resultArea.appendChild(resultElement);
 		})
 		.catch((error) => {
 		  // 在结果展示区域添加错误信息 
 		  var errorElement = document.createElement('p');
-		  errorElement.textContent = '地址: ' + address + ' 获取空投资格出错: ' + error;
+		  errorElement.textContent = '地址/Address: ' + address + ' 获取空投资格出错/query: ' + error;
 		  resultArea.appendChild(errorElement);
 		});
 		await new Promise(r => setTimeout(r, 1000));
@@ -74,10 +74,10 @@
     <div class="search-container">
         <h1>Dymension空投资格批量查询</h1>
         <h2>Query Multiple Addresses of Dymension Airdrop Eligibility</h2>
-        <textarea id="searchTerm" placeholder="输入钱包地址，多个地址换行输入. Input multiple wallet addresses with multiple lines"></textarea>  
-        <button onclick="sendSearchRequest()">查询</button>
+        <textarea id="searchTerm" placeholder="输入钱包地址，多个地址换行输入/Input multiple wallet addresses with multiple lines"></textarea>  
+        <button onclick="sendSearchRequest()">查询/Query</button>
         <a href="https://twitter.com/lilas_sher" target="_blank"><i class="fa-brands fa-twitter"></i> Twitter</a>    
-        <h2>查询结果展示区</h2>
+        <h2>查询结果展示区/Results</h2>
   	<div id="result-area"></div>
     </div>  
 </body>  
